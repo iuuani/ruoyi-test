@@ -91,7 +91,6 @@
       <el-table-column label="学生名称" align="center" prop="studentName" />
       <el-table-column label="年龄" align="center" prop="studentAge" />
       <el-table-column label="爱好" align="center" prop="studentHobby" />
-      <el-table-column label="性别" align="center" prop="studentSex" />
       <el-table-column label="性别" align="center" prop="studentSex">
         <template slot-scope="scope">          
           <span>{{ displayGender(scope.row.studentSex, 1) }}</span>
@@ -143,6 +142,19 @@
         <el-form-item label="爱好" prop="studentHobby">
           <el-input v-model="form.studentHobby" placeholder="请输入爱好" />
         </el-form-item>
+        <el-form-item label="性别" prop="studentSex">
+          <el-select v-model="form.studentSex" placeholder="请选择性别">
+            <el-option label="男" value="0"></el-option>
+            <el-option label="女" value="1"></el-option>
+            <el-option label="未知" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="状态" prop="studentStatus">
+          <el-select v-model="form.studentStatus" placeholder="请选择状态">
+            <el-option label="正常" value="0"></el-option>
+            <el-option label="停用" value="1"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="生日" prop="studentBirthday">
           <el-date-picker clearable
             v-model="form.studentBirthday"
@@ -162,7 +174,6 @@
 
 <script>
 import { listManage, getManage, delManage, addManage, updateManage } from "@/api/student/manage";
-// import { displayGender } from "@/api/student/genderDisplay";
 
 export default {
   name: "Manage",
@@ -309,11 +320,11 @@ export default {
     displayGender(gender, choice) {
       switch (choice) {
           case 1:
-              return gender == 1 ? '男' : '女';
+              return gender == 0 ? '男' : '女';
           case 2:
-              return gender == 1 ? 'man' : 'woman';
+              return gender == 0 ? 'man' : 'woman';
           case 3:
-              return gender == 1 ? 'male' : 'female';
+              return gender == 0 ? 'male' : 'female';
           default:
               return '';
       }

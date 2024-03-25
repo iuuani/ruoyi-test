@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import com.ruoyi.common.constant.CacheConstants;
-import com.ruoyi.common.enums.LimitType;
+import com.ruoyi.common.config.enums.LimitType;
 
 /**
  * 限流注解

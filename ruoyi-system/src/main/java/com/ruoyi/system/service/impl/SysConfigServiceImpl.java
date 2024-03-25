@@ -10,7 +10,7 @@ import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.common.config.enums.DataSourceType;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysConfig;

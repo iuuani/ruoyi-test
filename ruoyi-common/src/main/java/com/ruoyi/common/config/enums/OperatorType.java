@@ -1,4 +1,4 @@
-package com.ruoyi.common.enums;
+package com.ruoyi.common.config.enums;
 
 /**
  * 操作人类别

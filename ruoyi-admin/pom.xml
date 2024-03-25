@@ -67,6 +67,12 @@
             <artifactId>ruoyi-student</artifactId>
         </dependency>
 
+        <!--爱好模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-hobby</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

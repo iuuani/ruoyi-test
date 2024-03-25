@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.config.enums.BusinessType;
 import com.ruoyi.system.domain.StuStudent;
 import com.ruoyi.system.service.IStuStudentService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
