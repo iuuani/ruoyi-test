@@ -1,18 +1,14 @@
 package com.ruoyi.system.controller;
 
+import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.system.common.Result;
-import com.ruoyi.system.domain.Triangular;
-import com.ruoyi.system.util.WebUtil;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
+import com.ruoyi.system.domain.CorrectedTriangle;
+import com.ruoyi.system.domain.Triangle;
+import com.ruoyi.system.domain.TriangleLite;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ClassName: TriangularController
@@ -24,11 +20,21 @@ import java.io.IOException;
  * @Version 1.0
  */
 @RestController
-//@RequestMapping("/triangular")
+@RequestMapping("triangular")
 public class TriangularController extends BaseController {
     @PostMapping
-    public AjaxResult calculateTriangular(@RequestBody Triangular triangularData) {
-        return AjaxResult.success("成功收到三角形数据: " + triangularData);
+    public AjaxResult triangular(@RequestBody TriangleLite lite) {
+        Triangle triangle = new Triangle((int) lite.getSideA(), (int) lite.getSideB(), (int) lite.getSideC());
+//        CorrectedTriangle triangle = new CorrectedTriangle(lite.getSideA(), lite.getSideB(), lite.getSideC());
+
+        Map data = new HashMap();
+
+        data.put("type", triangle.toString());
+        data.put("area", triangle.area());
+        data.put("circumference", triangle.getCircumference());
+
+        return AjaxResult.success(data);
     }
+
 }
 

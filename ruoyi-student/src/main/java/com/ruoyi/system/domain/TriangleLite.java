@@ -5,18 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * ClassName: Triangular
- * Package: com.ruoyi.system.domain
+ * ClassName: sjx
+ * Package: com.ruoyi.system.controller
  * Description:
  *
  * @Author iuuani
- * @Create 2024/3/25 12:52
+ * @Create 2024/3/25 20:39
  * @Version 1.0
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Triangular {
+public class TriangleLite {
     private double sideA;
     private double sideB;
     private double sideC;
