@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuHobbiesMapper">
+    
+    <resultMap type="StuHobbies" id="StuHobbiesResult">
+        <result property="id"    column="id"    />
+        <result property="hobby"    column="hobby"    />
+    </resultMap>
+
+    <sql id="selectStuHobbiesVo">
+        select id, hobby from stu_hobbies
+    </sql>
+
+    <select id="selectStuHobbiesList" parameterType="StuHobbies" resultMap="StuHobbiesResult">
+        <include refid="selectStuHobbiesVo"/>
+        <where>  
+            <if test="hobby != null  and hobby != ''"> and hobby = #{hobby}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuHobbiesById" parameterType="Long" resultMap="StuHobbiesResult">
+        <include refid="selectStuHobbiesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStuHobbies" parameterType="StuHobbies" useGeneratedKeys="true" keyProperty="id">
+        insert into stu_hobbies
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hobby != null and hobby != ''">hobby,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hobby != null and hobby != ''">#{hobby},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuHobbies" parameterType="StuHobbies">
+        update stu_hobbies
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hobby != null and hobby != ''">hobby = #{hobby},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStuHobbiesById" parameterType="Long">
+        delete from stu_hobbies where id = #{id}
+    </delete>
+
+    <delete id="deleteStuHobbiesByIds" parameterType="String">
+        delete from stu_hobbies where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
