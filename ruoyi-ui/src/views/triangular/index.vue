@@ -144,9 +144,10 @@ export default {
       const m = Math.sqrt(1 - t ** 2);
       const h = b * m;
       const x = Math.sqrt(B2 - h ** 2);
-      
+
       // 获取 Canvas 元素和上下文
       const canvas = this.$refs.canvas;
+
       const ctx = canvas.getContext('2d');
 
       // 清除之前绘制的内容

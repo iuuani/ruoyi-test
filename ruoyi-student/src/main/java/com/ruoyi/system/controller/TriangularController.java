@@ -20,7 +20,7 @@ import java.util.Map;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("triangular")
+@RequestMapping("/triangular")
 public class TriangularController extends BaseController {
     @PostMapping
     public AjaxResult triangular(@RequestBody TriangleLite lite) {
