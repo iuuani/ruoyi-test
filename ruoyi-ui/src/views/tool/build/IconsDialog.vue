@@ -4,26 +4,27 @@
       v-bind="$attrs"
       width="980px"
       :modal-append-to-body="false"
-      v-on="$listeners"
       @open="onOpen"
       @close="onClose"
     >
-      <div slot="title">
-        选择图标
-        <el-input
-          v-model="key"
-          size="mini"
-          :style="{width: '260px'}"
-          placeholder="请输入图标名称"
-          prefix-icon="el-icon-search"
-          clearable
-        />
-      </div>
+      <template v-slot:title>
+        <div>
+          选择图标
+          <el-input
+            v-model:value="key"
+            size="mini"
+            :style="{ width: '260px' }"
+            placeholder="请输入图标名称"
+            prefix-icon="el-icon-search"
+            clearable
+          />
+        </div>
+      </template>
       <ul class="icon-ul">
         <li
           v-for="icon in iconList"
           :key="icon"
-          :class="active===icon?'active-item':''"
+          :class="active === icon ? 'active-item' : ''"
           @click="onSelect(icon)"
         >
           <i :class="icon" />
@@ -33,29 +34,43 @@
     </el-dialog>
   </div>
 </template>
+
 <script>
+import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
 import iconList from '@/utils/generator/icon.json'
 
-const originList = iconList.map(name => `el-icon-${name}`)
+function inheriltClassAndStyle() {
+  const attrs = this.$attrs
+  attrs.class && this.$el.classList.add(attrs.class)
+  attrs.style &&
+    Object.entries(attrs.style).forEach(([k, v]) => {
+      this.$el.style[k] = v
+    })
+}
+
+const originList = iconList.map((name) => `el-icon-${name}`)
 
 export default {
+  mounted() {
+    inheriltClassAndStyle.call(this)
+  },
   inheritAttrs: false,
   props: ['current'],
   data() {
     return {
       iconList: originList,
       active: null,
-      key: ''
+      key: '',
     }
   },
   watch: {
     key(val) {
       if (val) {
-        this.iconList = originList.filter(name => name.indexOf(val) > -1)
+        this.iconList = originList.filter((name) => name.indexOf(val) > -1)
       } else {
         this.iconList = originList
       }
-    }
+    },
   },
   methods: {
     onOpen() {
@@ -65,12 +80,14 @@ export default {
     onClose() {},
     onSelect(icon) {
       this.active = icon
-      this.$emit('select', icon)
-      this.$emit('update:visible', false)
-    }
-  }
+      $emit(this, 'select', icon)
+      $emit(this, 'update:visible', false)
+    },
+  },
+  emits: ['select', 'update:visible'],
 }
 </script>
+
 <style lang="scss" scoped>
 .icon-ul {
   margin: 0;
@@ -90,9 +107,9 @@ export default {
     &:hover {
       background: #f2f2f2;
     }
-    &.active-item{
+    &.active-item {
       background: #e1f3fb;
-      color: #7a6df0
+      color: #7a6df0;
     }
     > i {
       font-size: 30px;

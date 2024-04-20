@@ -1,17 +1,22 @@
+import { $on, $off, $once, $emit } from '../gogocodeTransfer'
 import Dict from './Dict'
 import { mergeOptions } from './DictOptions'
 
-export default function(Vue, options) {
+export default function (Vue, options) {
   mergeOptions(options)
-  Vue.mixin({
+  window.$vueApp.mixin({
     data() {
-      if (this.$options === undefined || this.$options.dicts === undefined || this.$options.dicts === null) {
+      if (
+        this.$options === undefined ||
+        this.$options.dicts === undefined ||
+        this.$options.dicts === null
+      ) {
         return {}
       }
       const dict = new Dict()
       dict.owner = this
       return {
-        dict
+        dict,
       }
     },
     created() {
@@ -22,8 +27,11 @@ export default function(Vue, options) {
       this.dict.init(this.$options.dicts).then(() => {
         options.onReady && options.onReady(this.dict)
         this.$nextTick(() => {
-          this.$emit('dictReady', this.dict)
-          if (this.$options.methods && this.$options.methods.onDictReady instanceof Function) {
+          $emit(this, 'dictReady', this.dict)
+          if (
+            this.$options.methods &&
+            this.$options.methods.onDictReady instanceof Function
+          ) {
             this.$options.methods.onDictReady.call(this, this.dict)
           }
         })

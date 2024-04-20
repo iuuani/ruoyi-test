@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       $_sidebarElm: null,
-      $_resizeHandler: null
+      $_resizeHandler: null,
     }
   },
   mounted() {
@@ -19,7 +19,7 @@ export default {
     // when keep-alive chart activated, auto resize
     this.resize()
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.destroyListener()
   },
   deactivated() {
@@ -39,18 +39,27 @@ export default {
       }, 100)
       window.addEventListener('resize', this.$_resizeHandler)
 
-      this.$_sidebarElm = document.getElementsByClassName('sidebar-container')[0]
-      this.$_sidebarElm && this.$_sidebarElm.addEventListener('transitionend', this.$_sidebarResizeHandler)
+      this.$_sidebarElm =
+        document.getElementsByClassName('sidebar-container')[0]
+      this.$_sidebarElm &&
+        this.$_sidebarElm.addEventListener(
+          'transitionend',
+          this.$_sidebarResizeHandler
+        )
     },
     destroyListener() {
       window.removeEventListener('resize', this.$_resizeHandler)
       this.$_resizeHandler = null
 
-      this.$_sidebarElm && this.$_sidebarElm.removeEventListener('transitionend', this.$_sidebarResizeHandler)
+      this.$_sidebarElm &&
+        this.$_sidebarElm.removeEventListener(
+          'transitionend',
+          this.$_sidebarResizeHandler
+        )
     },
     resize() {
       const { chart } = this
       chart && chart.resize()
-    }
-  }
+    },
+  },
 }

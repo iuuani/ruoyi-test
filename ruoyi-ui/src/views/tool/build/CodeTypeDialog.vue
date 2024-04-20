@@ -5,7 +5,6 @@
       width="500px"
       :close-on-click-modal="false"
       :modal-append-to-body="false"
-      v-on="$listeners"
       @open="onOpen"
       @close="onClose"
     >
@@ -19,7 +18,7 @@
         >
           <el-col :span="24">
             <el-form-item label="生成类型" prop="type">
-              <el-radio-group v-model="formData.type">
+              <el-radio-group v-model:value="formData.type">
                 <el-radio-button
                   v-for="(item, index) in typeOptions"
                   :key="index"
@@ -31,24 +30,36 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item v-if="showFileName" label="文件名" prop="fileName">
-              <el-input v-model="formData.fileName" placeholder="请输入文件名" clearable />
+              <el-input
+                v-model:value="formData.fileName"
+                placeholder="请输入文件名"
+                clearable
+              />
             </el-form-item>
           </el-col>
         </el-form>
       </el-row>
 
-      <div slot="footer">
-        <el-button @click="close">
-          取消
-        </el-button>
-        <el-button type="primary" @click="handleConfirm">
-          确定
-        </el-button>
-      </div>
+      <template v-slot:footer>
+        <div>
+          <el-button @click="close"> 取消 </el-button>
+          <el-button type="primary" @click="handleConfirm"> 确定 </el-button>
+        </div>
+      </template>
     </el-dialog>
   </div>
 </template>
+
 <script>
+import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
+function inheriltClassAndStyle() {
+  const attrs = this.$attrs
+  attrs.class && this.$el.classList.add(attrs.class)
+  attrs.style &&
+    Object.entries(attrs.style).forEach(([k, v]) => {
+      this.$el.style[k] = v
+    })
+}
 export default {
   inheritAttrs: false,
   props: ['showFileName'],
@@ -56,51 +67,59 @@ export default {
     return {
       formData: {
         fileName: undefined,
-        type: 'file'
+        type: 'file',
       },
       rules: {
-        fileName: [{
-          required: true,
-          message: '请输入文件名',
-          trigger: 'blur'
-        }],
-        type: [{
-          required: true,
-          message: '生成类型不能为空',
-          trigger: 'change'
-        }]
+        fileName: [
+          {
+            required: true,
+            message: '请输入文件名',
+            trigger: 'blur',
+          },
+        ],
+        type: [
+          {
+            required: true,
+            message: '生成类型不能为空',
+            trigger: 'change',
+          },
+        ],
       },
-      typeOptions: [{
-        label: '页面',
-        value: 'file'
-      }, {
-        label: '弹窗',
-        value: 'dialog'
-      }]
+      typeOptions: [
+        {
+          label: '页面',
+          value: 'file',
+        },
+        {
+          label: '弹窗',
+          value: 'dialog',
+        },
+      ],
     }
   },
-  computed: {
-  },
+  computed: {},
   watch: {},
-  mounted() {},
   methods: {
     onOpen() {
       if (this.showFileName) {
         this.formData.fileName = `${+new Date()}.vue`
       }
     },
-    onClose() {
-    },
+    onClose() {},
     close(e) {
-      this.$emit('update:visible', false)
+      $emit(this, 'update:visible', false)
     },
     handleConfirm() {
-      this.$refs.elForm.validate(valid => {
+      this.$refs.elForm.validate((valid) => {
         if (!valid) return
-        this.$emit('confirm', { ...this.formData })
+        $emit(this, 'confirm', { ...this.formData })
         this.close()
       })
-    }
-  }
+    },
+  },
+  mounted() {
+    inheriltClassAndStyle.call(this)
+  },
+  emits: ['update:visible', 'confirm'],
 }
 </script>

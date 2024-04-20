@@ -1,10 +1,10 @@
-import Vue from 'vue'
+import * as Vue from 'vue'
 import store from '@/store'
 import DataDict from '@/utils/dict'
 import { getDicts as getDicts } from '@/api/system/dict/data'
 
 function searchDictByKey(dict, key) {
-  if (key == null && key == "") {
+  if (key == null && key == '') {
     return null
   }
   try {
@@ -19,7 +19,7 @@ function searchDictByKey(dict, key) {
 }
 
 function install() {
-  Vue.use(DataDict, {
+  window.$vueApp.use(DataDict, {
     metas: {
       '*': {
         labelField: 'dictLabel',
@@ -27,15 +27,22 @@ function install() {
         request(dictMeta) {
           const storeDict = searchDictByKey(store.getters.dict, dictMeta.type)
           if (storeDict) {
-            return new Promise(resolve => { resolve(storeDict) })
+            return new Promise((resolve) => {
+              resolve(storeDict)
+            })
           } else {
             return new Promise((resolve, reject) => {
-              getDicts(dictMeta.type).then(res => {
-                store.dispatch('dict/setDict', { key: dictMeta.type, value: res.data })
-                resolve(res.data)
-              }).catch(error => {
-                reject(error)
-              })
+              getDicts(dictMeta.type)
+                .then((res) => {
+                  store.dispatch('dict/setDict', {
+                    key: dictMeta.type,
+                    value: res.data,
+                  })
+                  resolve(res.data)
+                })
+                .catch((error) => {
+                  reject(error)
+                })
             })
           }
         },

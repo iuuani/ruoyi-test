@@ -1,13 +1,23 @@
 <template>
   <el-color-picker
-    v-model="theme"
-    :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d', ]"
+    v-model:value="theme"
+    :predefine="[
+      '#409EFF',
+      '#1890ff',
+      '#304156',
+      '#212121',
+      '#11a983',
+      '#13c2c2',
+      '#6959CD',
+      '#f5222d',
+    ]"
     class="theme-picker"
     popper-class="theme-picker-dropdown"
   />
 </template>
 
 <script>
+import { $on, $off, $once, $emit } from '../../utils/gogocodeTransfer'
 const version = require('element-ui/package.json').version // element-ui version from node_modules
 const ORIGINAL_THEME = '#409EFF' // default color
 
@@ -15,31 +25,33 @@ export default {
   data() {
     return {
       chalk: '', // content of theme-chalk css
-      theme: ''
+      theme: '',
     }
   },
   computed: {
     defaultTheme() {
       return this.$store.state.settings.theme
-    }
+    },
   },
   watch: {
     defaultTheme: {
-      handler: function(val, oldVal) {
+      deep: true,
+
+      handler: function (val, oldVal) {
         this.theme = val
       },
-      immediate: true
+
+      immediate: true,
     },
     async theme(val) {
       await this.setTheme(val)
-    }
+    },
   },
   created() {
-    if(this.defaultTheme !== ORIGINAL_THEME) {
+    if (this.defaultTheme !== ORIGINAL_THEME) {
       this.setTheme(this.defaultTheme)
     }
   },
-
   methods: {
     async setTheme(val) {
       const oldVal = this.chalk ? this.theme : ORIGINAL_THEME
@@ -49,8 +61,14 @@ export default {
 
       const getHandler = (variable, id) => {
         return () => {
-          const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
-          const newStyle = this.updateStyle(this[variable], originalCluster, themeCluster)
+          const originalCluster = this.getThemeCluster(
+            ORIGINAL_THEME.replace('#', '')
+          )
+          const newStyle = this.updateStyle(
+            this[variable],
+            originalCluster,
+            themeCluster
+          )
 
           let styleTag = document.getElementById(id)
           if (!styleTag) {
@@ -71,18 +89,25 @@ export default {
 
       chalkHandler()
 
-      const styles = [].slice.call(document.querySelectorAll('style'))
-        .filter(style => {
+      const styles = [].slice
+        .call(document.querySelectorAll('style'))
+        .filter((style) => {
           const text = style.innerText
-          return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+          return (
+            new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+          )
         })
-      styles.forEach(style => {
+      styles.forEach((style) => {
         const { innerText } = style
         if (typeof innerText !== 'string') return
-        style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
+        style.innerText = this.updateStyle(
+          innerText,
+          originalCluster,
+          themeCluster
+        )
       })
 
-      this.$emit('change', val)
+      $emit(this, 'change', val)
     },
 
     updateStyle(style, oldCluster, newCluster) {
@@ -94,7 +119,7 @@ export default {
     },
 
     getCSSString(url, variable) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const xhr = new XMLHttpRequest()
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -113,7 +138,8 @@ export default {
         let green = parseInt(color.slice(2, 4), 16)
         let blue = parseInt(color.slice(4, 6), 16)
 
-        if (tint === 0) { // when primary color is in its rgb space
+        if (tint === 0) {
+          // when primary color is in its rgb space
           return [red, green, blue].join(',')
         } else {
           red += Math.round(tint * (255 - red))
@@ -150,8 +176,9 @@ export default {
       }
       clusters.push(shadeColor(theme, 0.1))
       return clusters
-    }
-  }
+    },
+  },
+  emits: ['change'],
 }
 </script>
 
@@ -160,13 +187,11 @@ export default {
 .theme-picker-dropdown {
   z-index: 99999 !important;
 }
-
 .theme-picker .el-color-picker__trigger {
   height: 26px !important;
   width: 26px !important;
   padding: 2px;
 }
-
 .theme-picker-dropdown .el-color-dropdown__link-btn {
   display: none;
 }
