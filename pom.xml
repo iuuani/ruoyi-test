@@ -162,6 +162,13 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- CRM模块-->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>huhst-crm</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -172,6 +179,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>huhst-crm</module>
     </modules>
     <packaging>pom</packaging>
 
