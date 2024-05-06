@@ -3,35 +3,12 @@
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
         <blockquote class="text-warning" style="font-size: 14px">
-          领取阿里云通用云产品1888优惠券
-          <br />
-          <el-link
-            href="https://www.aliyun.com/minisite/goods?userCode=brki8iof"
-            type="primary"
-            target="_blank"
-            >https://www.aliyun.com/minisite/goods?userCode=brki8iof</el-link
-          >
-          <br />
-          领取腾讯云通用云产品2860优惠券
-          <br />
-          <el-link
-            href="https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console"
-            type="primary"
-            target="_blank"
-            >https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console</el-link
-          >
-          <br />
-          阿里云服务器折扣区
-          <el-link href="http://aly.ruoyi.vip" type="primary" target="_blank"
-            >>☛☛点我进入☚☚</el-link
-          >
-          &nbsp;&nbsp;&nbsp; 腾讯云服务器秒杀区
-          <el-link href="http://txy.ruoyi.vip" type="primary" target="_blank"
-            >>☛☛点我进入☚☚</el-link
-          ><br />
-          <h4 class="text-danger">
-            云产品通用红包，可叠加官网常规优惠使用。(仅限新用户)
-          </h4>
+          基于rouyi-vue构建的用于软件测试技术教学的演示环境，可进行：<BR/>
+          三角形类型判断的黑盒、白盒测试，<br/>
+          单元测试<br/>
+          性能测试<BR/>
+          后端接口测试<br/>
+          简单的安全性测试
         </blockquote>
 
         <hr />
@@ -120,9 +97,9 @@
             <p>
               <i class="el-icon-user-solid"></i> QQ群：<s> 满937441 </s> <s> 满887144332 </s>
               <s> 满180251782 </s> <s> 满104180207 </s> <s> 满186866453 </s> <s> 满201396349 </s>
-              <s> 满101456076 </s> <s> 满101539465 </s> <s> 满264312783 </s> <s> 满167385320 </s> 
-              <s> 满104748341 </s> <s> 满160110482 </s> <s> 满170801498 </s> <s> 满108482800 </s> 
-              <s> 满101046199 </s> <s> 满136919097 </s> <s> 满143961921 </s> <s> 满174951577 </s> 
+              <s> 满101456076 </s> <s> 满101539465 </s> <s> 满264312783 </s> <s> 满167385320 </s>
+              <s> 满104748341 </s> <s> 满160110482 </s> <s> 满170801498 </s> <s> 满108482800 </s>
+              <s> 满101046199 </s> <s> 满136919097 </s> <s> 满143961921 </s> <s> 满174951577 </s>
               <s> 满161281055 </s> <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=XIzkm_mV2xTsUtFxo63bmicYoDBA6Ifm&authKey=dDW%2F4qsmw3x9govoZY9w%2FoWAoC4wbHqGal%2BbqLzoS6VBarU8EBptIgPKN%2FviyC8j&noverify=0&group_code=138988063" target="_blank">138988063</a>
             </p>
             <p>

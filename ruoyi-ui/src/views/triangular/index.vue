@@ -134,9 +134,17 @@ export default {
       this.$refs['elForm'].resetFields()
     },
     drawTriangles() {
-      const a = parseFloat(this.formData.field101);
-      const b = parseFloat(this.formData.field102);
-      const c = parseFloat(this.formData.field103);
+      // 获取 Canvas 元素和上下文
+      const canvas = this.$refs.canvas;
+      const ctx = canvas.getContext('2d');
+      let a = parseFloat(this.formData.field101);
+      let b = parseFloat(this.formData.field102);
+      let c = parseFloat(this.formData.field103);
+
+      let ratio = 200 /a;
+      a = a * ratio;
+      b= b* ratio;
+      c = c*ratio;
       const A2 = a ** 2;
       const B2 = b ** 2;
       const C2 = c ** 2;
@@ -145,10 +153,7 @@ export default {
       const h = b * m;
       const x = Math.sqrt(B2 - h ** 2);
 
-      // 获取 Canvas 元素和上下文
-      const canvas = this.$refs.canvas;
 
-      const ctx = canvas.getContext('2d');
 
       // 清除之前绘制的内容
       ctx.clearRect(0, 0, canvas.width, canvas.height);

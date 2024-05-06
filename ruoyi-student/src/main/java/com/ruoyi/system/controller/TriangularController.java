@@ -24,16 +24,17 @@ import java.util.Map;
 public class TriangularController extends BaseController {
     @PostMapping
     public AjaxResult triangular(@RequestBody TriangleLite lite) {
-        Triangle triangle = new Triangle((int) lite.getSideA(), (int) lite.getSideB(), (int) lite.getSideC());
-//        CorrectedTriangle triangle = new CorrectedTriangle(lite.getSideA(), lite.getSideB(), lite.getSideC());
+        try {
+            Triangle triangle = new Triangle((int) lite.getSideA(), (int) lite.getSideB(), (int) lite.getSideC());
+            Map data = new HashMap();
+            data.put("type", triangle.toString());
+            data.put("area", triangle.getArea());
+            data.put("circumference", triangle.getCircumference());
+            return AjaxResult.success(data);
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
 
-        Map data = new HashMap();
-
-        data.put("type", triangle.toString());
-        data.put("area", triangle.area());
-        data.put("circumference", triangle.getCircumference());
-
-        return AjaxResult.success(data);
     }
 
 }

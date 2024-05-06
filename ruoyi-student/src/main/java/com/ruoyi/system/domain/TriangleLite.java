@@ -3,6 +3,9 @@ package com.ruoyi.system.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * ClassName: sjx
@@ -16,7 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Validated
 public class TriangleLite {
+
+    @NotEmpty
     private double sideA;
     private double sideB;
     private double sideC;
