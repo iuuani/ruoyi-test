@@ -1,5 +1,12 @@
 <template>
   <div>
+    <el-row :gutter="20">
+      <el-col :offset="6" :span="12">
+        <h4>
+      要求输入3个介于1-100之间的正数a、b、c作为三角形的三条边，判断这3个数构成的是一般三角形、等边三角形、等腰三角形、直角三角形，还是无法构成三角形。
+        </h4>
+      </el-col>
+    </el-row>
     <el-row :gutter="15">
       <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px">
         <el-col :span="24">
@@ -140,8 +147,21 @@ export default {
       let a = parseFloat(this.formData.field101);
       let b = parseFloat(this.formData.field102);
       let c = parseFloat(this.formData.field103);
+      let x1 =a;
+      if(a<b){
+        x1=a;
+        a=b;
+        b=x1;
+      }
 
-      let ratio = 200 /a;
+      if(a<c){
+        x1 = a;
+        a=c;
+        c=x1;
+      }
+
+      console.log("a=",a);
+      let ratio = 300 /a;
       a = a * ratio;
       b= b* ratio;
       c = c*ratio;

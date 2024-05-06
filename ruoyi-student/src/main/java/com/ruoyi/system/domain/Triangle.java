@@ -105,6 +105,31 @@ public class Triangle {
         this.sideC = c;
         this.type = this.getType();
     }
+    @Override
+    public String toString(){
+        String typeStr = "";
+        switch (this.type) {
+            case Equilateral:
+                typeStr = "等边三角形";
+                break;
+            case Isosceles:
+                typeStr = "等腰三角形";
+                break;
+            case RightAngled:
+                typeStr = "直角三角形";
+                break;
+            case General:
+                typeStr = "一般三角形";
+                break;
+            case NoTriangle:
+                typeStr = "无法构成三角形";
+                break;
+            default:
+                typeStr = "无效三角形";
+                break;
+        }
+        return typeStr;
+    }
 
 }
 
