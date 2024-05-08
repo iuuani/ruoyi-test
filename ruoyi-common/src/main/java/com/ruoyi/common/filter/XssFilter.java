@@ -12,7 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.config.enums.HttpMethod;
+import com.ruoyi.common.enums.HttpMethod;
 
 /**
  * 防止XSS攻击的过滤器

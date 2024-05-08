@@ -2,7 +2,6 @@ package com.ruoyi.system.controller;
 
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.system.domain.CorrectedTriangle;
 import com.ruoyi.system.domain.Triangle;
 import com.ruoyi.system.domain.TriangleLite;
 import org.springframework.web.bind.annotation.*;

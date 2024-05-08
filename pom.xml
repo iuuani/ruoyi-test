@@ -24,7 +24,7 @@
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <fastjson.version>2.0.43</fastjson.version>
-        <oshi.version>6.4.13</oshi.version>
+        <oshi.version>6.5.0</oshi.version>
         <commons.io.version>2.13.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
@@ -162,17 +162,10 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
-            <!-- 学生模块-->
+            <!-- CRM模块-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-student</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-
-            <!-- 爱好模块-->
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-hobby</artifactId>
+                <artifactId>huhst-crm</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 
@@ -186,8 +179,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
-        <module>ruoyi-student</module>
-        <module>ruoyi-hobby</module>
+        <module>huhst-crm</module>
     </modules>
     <packaging>pom</packaging>
 
