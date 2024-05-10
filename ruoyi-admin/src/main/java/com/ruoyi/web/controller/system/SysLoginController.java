@@ -20,6 +20,7 @@ import com.ruoyi.system.service.ISysMenuService;
 
 /**
  * 登录验证
+<<<<<<<<< Temporary merge branch 1
  *
  * @author ruoyi
  */
@@ -51,6 +52,7 @@ public class SysLoginController {
 
     /**
      * 获取用户信息
+<<<<<<<<< Temporary merge branch 1
      *
      * @return 用户信息
      */
@@ -70,6 +72,7 @@ public class SysLoginController {
 
     /**
      * 获取路由信息
+<<<<<<<<< Temporary merge branch 1
      *
      * @return 路由信息
      */
